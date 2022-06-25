@@ -2,32 +2,27 @@ import React from "react";
 import "@vkontakte/vkui/dist/vkui.css";
 import {
     AppRoot, Badge,
-    Epic,
-    Group,
-    Panel,
+    Epic, Group, Panel,
     PanelHeader, Placeholder,
-    SplitCol,
-    SplitLayout, Tabbar, TabbarItem,
-    usePlatform, View,
-    VKCOM,
+    SplitCol, SplitLayout, Tabbar,
+    TabbarItem, View,
     withAdaptivity,
 } from "@vkontakte/vkui";
 import {
-    Icon28QrCodeOutline, Icon28TearOffFlyerOutline,
-    Icon28UserCircleOutline, Icon28UserOutline, Icon56NewsfeedOutline
+    Icon28QrCodeOutline, Icon28SchoolOutline,
+    Icon28UserOutline
 } from "@vkontakte/icons";
+import ProfilePage from "./panles/account";
+import Dash from "./panles/dash";
 
 const AppTabBar = withAdaptivity(
     ({ viewWidth }) => {
-        const platform = usePlatform();
-        const [activeStory, setActiveStory] = React.useState("profile");
+        const [activeStory, setActiveStory] = React.useState("dash");
         const onStoryChange = (e) => setActiveStory(e.currentTarget.dataset.story);
         const isDesktop = false;
-        const hasHeader = platform !== VKCOM;
 
         return (
             <SplitLayout
-                header={hasHeader && <PanelHeader separator={false} />}
                 style={{ justifyContent: "center" }}
             >
                 <SplitCol
@@ -43,11 +38,11 @@ const AppTabBar = withAdaptivity(
                                 <Tabbar>
                                     <TabbarItem
                                         onClick={onStoryChange}
-                                        selected={activeStory === "school"}
-                                        data-story="school"
+                                        selected={activeStory === "dash"}
+                                        data-story="dash"
                                         text="Школа"
                                     >
-                                        <Icon28TearOffFlyerOutline />
+                                        <Icon28SchoolOutline />
                                     </TabbarItem>
                                     <TabbarItem
                                         onClick={onStoryChange}
@@ -70,14 +65,10 @@ const AppTabBar = withAdaptivity(
                             )
                         }
                     >
-                        <View id="school" activePanel="school">
-                            <Panel id="school">
-                                <PanelHeader>О школе</PanelHeader>
-                                <Group style={{ height: "1000px" }}>
-                                    <Placeholder
-                                        icon={<Icon56NewsfeedOutline width={56} height={56} />}
-                                    />
-                                </Group>
+                        <View id="dash" activePanel="dash">
+                            <Panel id="dash">
+                                <PanelHeader>Информация</PanelHeader>
+                                <Dash/>
                             </Panel>
                         </View>
                         <View id="qrcode" activePanel="qrcode">
@@ -93,11 +84,7 @@ const AppTabBar = withAdaptivity(
                         <View id="profile" activePanel="profile">
                             <Panel id="profile">
                                 <PanelHeader>Профиль</PanelHeader>
-                                <Group style={{ height: "1000px" }}>
-                                    <Placeholder
-                                        icon={<Icon28UserCircleOutline width={56} height={56} />}
-                                    ></Placeholder>
-                                </Group>
+                                <ProfilePage/>
                             </Panel>
                         </View>
                     </Epic>
