@@ -8,7 +8,7 @@ import App from "./app/App";
 const root = ReactDOMClient.createRoot(document.getElementById("app"));
 
  root.render(
-        <ConfigProvider locale={"ru"} platform={"ios"} appearance={"dark"}>
+        <ConfigProvider id={"conf"} locale={"ru"} platform={"ios"} appearance={"light"}>
             <AdaptivityProvider>
                 <App/>
             </AdaptivityProvider>

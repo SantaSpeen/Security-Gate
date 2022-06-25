@@ -4,7 +4,7 @@ import {
 } from "@vkontakte/vkui";
 import ProfileInfo from "../fragments/profile";
 
-class ProfilePage extends React.Component {
+class AdminPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -20,7 +20,7 @@ class ProfilePage extends React.Component {
                 <ProfileInfo
                     name={"Маслова Ольга Юрьевна"}
                     adName={"MaslovaOU"}
-                    avatarUrl={require("../../assets/ava_admin.jpg")}
+                    avatarUrl={require("../../assets/avatar_admin.jpg")}
                     role={"Директор"}
                 />
             </Group>
@@ -29,4 +29,4 @@ class ProfilePage extends React.Component {
 }
 
 
-export default ProfilePage;
+export default AdminPage;

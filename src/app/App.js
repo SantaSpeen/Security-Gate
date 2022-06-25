@@ -1,19 +1,20 @@
 import React from "react";
 import "@vkontakte/vkui/dist/vkui.css";
 import {
-    AppRoot, Badge,
+    AppRoot,
     Epic, Group, Panel,
     PanelHeader, Placeholder,
     SplitCol, SplitLayout, Tabbar,
-    TabbarItem, View,
+    TabbarItem, View, Counter,
     withAdaptivity,
 } from "@vkontakte/vkui";
 import {
     Icon28QrCodeOutline, Icon28SchoolOutline,
-    Icon28UserOutline
+    Icon28SettingsOutline, Icon28Notifications
 } from "@vkontakte/icons";
-import ProfilePage from "./panles/account";
+import AdminPage from "./panles/admin";
 import Dash from "./panles/dash";
+import QRCodePage from "./panles/qr";
 
 const AppTabBar = withAdaptivity(
     ({ viewWidth }) => {
@@ -41,6 +42,7 @@ const AppTabBar = withAdaptivity(
                                         selected={activeStory === "dash"}
                                         data-story="dash"
                                         text="Школа"
+                                        indicator={<Counter size="s" mode="prominent">!</Counter>}
                                     >
                                         <Icon28SchoolOutline />
                                     </TabbarItem>
@@ -54,12 +56,20 @@ const AppTabBar = withAdaptivity(
                                     </TabbarItem>
                                     <TabbarItem
                                         onClick={onStoryChange}
-                                        selected={activeStory === "profile"}
-                                        data-story="profile"
-                                        indicator={<Badge mode="prominent" />}
-                                        text="Профиль"
+                                        selected={activeStory === "notifications"}
+                                        data-story="notifications"
+                                        text="Уведомления"
+                                        indicator={<Counter size="s" mode="primary">3</Counter>}
                                     >
-                                        <Icon28UserOutline />
+                                        <Icon28Notifications />
+                                    </TabbarItem>
+                                    <TabbarItem
+                                        onClick={onStoryChange}
+                                        selected={activeStory === "admin"}
+                                        data-story="admin"
+                                        text="Админка"
+                                    >
+                                        <Icon28SettingsOutline />
                                     </TabbarItem>
                                 </Tabbar>
                             )
@@ -73,18 +83,24 @@ const AppTabBar = withAdaptivity(
                         </View>
                         <View id="qrcode" activePanel="qrcode">
                             <Panel id="qrcode">
-                                <PanelHeader>QR Code </PanelHeader>
+                                <PanelHeader>QR Code</PanelHeader>
+                                <QRCodePage/>
+                            </Panel>
+                        </View>
+                        <View id="notifications" activePanel="notifications">
+                            <Panel id="notifications">
+                                <PanelHeader>Уведомления</PanelHeader>
                                 <Group style={{ height: "1000px" }}>
                                     <Placeholder
-                                        icon={<Icon28QrCodeOutline width={56} height={56} />}
+                                        icon={<Icon28Notifications width={56} height={56} />}
                                     ></Placeholder>
                                 </Group>
                             </Panel>
                         </View>
-                        <View id="profile" activePanel="profile">
-                            <Panel id="profile">
-                                <PanelHeader>Профиль</PanelHeader>
-                                <ProfilePage/>
+                        <View id="admin" activePanel="admin">
+                            <Panel id="admin">
+                                <PanelHeader>Админ панель</PanelHeader>
+                                <AdminPage/>
                             </Panel>
                         </View>
                     </Epic>
@@ -103,7 +119,6 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            activePanel: "general"
         }
 
     }
